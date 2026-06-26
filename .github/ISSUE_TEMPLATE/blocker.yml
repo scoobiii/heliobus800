@@ -1,0 +1,22 @@
+name: BLOCKER
+description: Decisão ou dependência que paralisa a sprint
+labels: ["blocker", "priority-p0"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Decisão/dependência bloqueada
+      placeholder: "Ex: Diablo vs NVIDIA monopolar"
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impacto se não resolvida — prazo
+      placeholder: "Prazo máximo para resolver"
+  - type: textarea
+    id: options
+    attributes:
+      label: Opções disponíveis
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decisão tomada (preencher ao fechar a issue)

@@ -1,0 +1,4 @@
+# HelioBus800 Python dependencies
+pytest>=8.0
+pymodbus>=3.6        # Modbus TCP para leitura de inverter/CDU
+requests>=2.31       # API calls (INMET, ANEEL, BCB)

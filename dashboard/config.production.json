@@ -1,0 +1,33 @@
+{
+  "environment": "production",
+  "sites": [],
+  "kpis_tracked": [
+    "PUE", "CUE", "DCiE", "ERE",
+    "conversion_efficiency_800vdc",
+    "llc_efficiency",
+    "gflops_per_watt",
+    "solar_generation_vs_warehouse_load",
+    "capex_payback_vs_lease_term",
+    "arc_fault_detection_ms"
+  ],
+  "telemetry": {
+    "bus_voltage_range_v": [600, 850],
+    "secondary_loop_supply_temp_c": [18, 22],
+    "arc_fault_detection_ms_max": 10,
+    "modbus_poll_interval_s": 5
+  },
+  "alert_thresholds": {
+    "dew_point_margin_c_min": 3,
+    "bus_voltage_deviation_pct_max": 5,
+    "pue_max": 1.15,
+    "efficiency_800vdc_min_pct": 92
+  },
+  "data_sources_to_integrate": [
+    "MEX BioDataCloud",
+    "Global DC Sentinel",
+    "VoltWise",
+    "ANEEL 1000/2021 Intelligence Dashboard",
+    "Solar Potential Dashboard"
+  ],
+  "platforms": ["classical_gpu", "photonic", "quantum_si28"]
+}

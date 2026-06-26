@@ -1,0 +1,35 @@
+name: Engineering Task
+description: Tarefa técnica de engenharia
+labels: ["engineering"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Fase
+      options:
+        - "Fase 1 - Pesquisa/PoC"
+        - "Fase 2 - Protótipo"
+        - "Fase 3 - Qualificação Tier III/IV"
+        - "Fase 4 - Escala"
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Plataforma alvo
+      options:
+        - "Clássico GPU/CPU"
+        - "Óptico/Fotônico"
+        - "Quântico Si-28"
+        - "Infra/Siting"
+        - "Todas"
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição técnica
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Definition of Done
+  - type: input
+    id: capex
+    attributes:
+      label: Impacto estimado no CAPEX/OPEX
