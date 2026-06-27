@@ -1,18 +1,22 @@
 {
   "environment": "production",
+  "normas": ["ASHRAE TC9.9 2021 Classe A1", "ABNT NBR 16665:2017", "ANSI/TIA-942-B"],
+  "ambiente": "fechado_selado",
   "sites": [],
   "kpis_tracked": [
     "PUE", "CUE", "DCiE", "ERE",
     "conversion_efficiency_800vdc",
-    "llc_efficiency",
     "gflops_per_watt",
     "solar_generation_vs_warehouse_load",
-    "capex_payback_vs_lease_term",
-    "arc_fault_detection_ms"
+    "capex_payback_vs_lease_term"
   ],
   "telemetry": {
     "bus_voltage_range_v": [600, 850],
-    "secondary_loop_supply_temp_c": [18, 22],
+    "loop_supply_temp_range_c": [15, 22],
+    "loop_return_temp_max_c": 45,
+    "internal_temp_ashrae_a1_c": [15, 32],
+    "internal_rh_max_pct": 50,
+    "dew_point_interno_max_c": 17,
     "arc_fault_detection_ms_max": 10,
     "modbus_poll_interval_s": 5
   },
@@ -20,14 +24,8 @@
     "dew_point_margin_c_min": 3,
     "bus_voltage_deviation_pct_max": 5,
     "pue_max": 1.15,
+    "cue_max": 0,
     "efficiency_800vdc_min_pct": 92
   },
-  "data_sources_to_integrate": [
-    "MEX BioDataCloud",
-    "Global DC Sentinel",
-    "VoltWise",
-    "ANEEL 1000/2021 Intelligence Dashboard",
-    "Solar Potential Dashboard"
-  ],
-  "platforms": ["classical_gpu", "photonic", "quantum_si28"]
+  "nota_orvalho": "Dew point de referência é INTERNO (sensor no DC), não externo. Ambiente fechado e selado com HVAC de precisão mantém UR ≤ 50% → dp interno 8-14°C → supply 18°C tem margem de 4-10°C. ASHRAE A1 permite supply mínimo de 15°C em ambiente controlado."
 }
