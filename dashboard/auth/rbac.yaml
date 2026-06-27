@@ -1,0 +1,56 @@
+profiles:
+  admin:
+    label: "Administrador MEx"
+    access: [all]
+    agents_available: all
+    llm_config_editable: true
+
+  board:
+    label: "Conselho / Board"
+    access: [kpis_all, financial_summary, compliance_status, ipo_metrics]
+    agents_available: [jose_ceo, gabriela_cfo, pedro_clo]
+
+  ceo:
+    label: "CEO"
+    access: [kpis_all, financial_summary, partnerships, strategic_roadmap]
+    agents_available: [jose_ceo, gabriela_cfo, pedro_clo, bruno_cto, rafaela_coo]
+
+  cfo:
+    label: "CFO"
+    access: [capex_opex, payback_per_site, financial_summary, investor_dashboard]
+    agents_available: [gabriela_cfo, amanda_ir]
+
+  cto:
+    label: "CTO"
+    access: [technical_specs, kpis_all, ci_cd_status, agent_config]
+    agents_available: [bruno_cto, victor_hvdc, sofia_power, joana_dc, selix_monitor]
+    llm_config_editable: true
+
+  coo:
+    label: "COO"
+    access: [operations_per_site, maintenance_schedule, iso_compliance, supply_chain]
+    agents_available: [rafaela_coo, ernesto_pm, bruno_manut, laura_ee, andre_audit]
+
+  engineer:
+    label: "Engenheiro"
+    access: [technical_specs, kpis_site, maintenance_schedule, ci_cd_status]
+    agents_available: [victor_hvdc, sofia_power, joana_dc, laura_ee, selix_monitor]
+
+  investor:
+    label: "Investidor"
+    access: [financial_summary, kpi_summary, roadmap_public, ipo_metrics]
+    agents_available: [amanda_ir]
+    read_only: true
+
+  client:
+    label: "Cliente / Locador de Telhado"
+    access: [site_kpis_own, energy_generation_own, contract_status_own]
+    agents_available: []
+    read_only: true
+    scope: own_site_only
+
+  public:
+    label: "Público / Visitante"
+    access: [project_overview, sustainability_metrics]
+    agents_available: []
+    read_only: true
