@@ -66,3 +66,55 @@ def run(interval: int = 60):
 
 if __name__ == '__main__':
     run()
+
+# ── endpoint REST para ThermoFlex bridge ─────────────────────────────────────
+def serve_telemetry(port: int = 8080):
+    """
+    Expõe /telemetry como endpoint HTTP simples (sem framework).
+    ThermoFlex-Dashboard faz polling neste endpoint via hb800_data_bridge.ts
+    """
+    import json
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+
+    agent_ref = {'bus_v': 800.0, 'loop_temp': 20.0, 'dew_point': 22.0}
+
+    class Handler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            if self.path == '/telemetry':
+                cfg = load_config()
+                bus_v = read_bus_voltage()
+                loop_temp = read_loop_temp()
+                dew_point = read_dew_point()
+                alerts = check_alerts(cfg, bus_v, loop_temp, dew_point)
+                payload = {
+                    'ts': __import__('time').strftime('%Y-%m-%dT%H:%M:%SZ',
+                                    __import__('time').gmtime()),
+                    'bus_voltage_v': bus_v,
+                    'loop_supply_temp_c': loop_temp,
+                    'dew_point_c': dew_point,
+                    'dew_point_margin_c': round(loop_temp - dew_point, 1),
+                    'pue': 1.12,          # stub — substituir por leitura real
+                    'cue': 0.0,
+                    'solar_gen_kw': 850.0, # stub
+                    'bess_soc_pct': 78.0,  # stub
+                    'alerts': alerts,
+                }
+                body = json.dumps(payload).encode()
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')  # CORS para ThermoFlex
+                self.end_headers()
+                self.wfile.write(body)
+            else:
+                self.send_response(404)
+                self.end_headers()
+        def log_message(self, *args): pass  # silencia logs de request
+
+    print(f"HB800 telemetry server em http://localhost:{port}/telemetry")
+    HTTPServer(('0.0.0.0', port), Handler).serve_forever()
+
+if __name__ == '__main__':
+    import threading
+    t = threading.Thread(target=serve_telemetry, daemon=True)
+    t.start()
+    run()

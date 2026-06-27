@@ -1,0 +1,3 @@
+[submodule "dashboard/thermoflex"]
+	path = dashboard/thermoflex
+	url = https://github.com/scoobiii/ThermoFlex-Dashboard.git
